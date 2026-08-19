@@ -9,12 +9,29 @@ game/
 ├── RULES.md          # 전체 룰북 (게임 개요/세계관/학습목표/규칙/점수계산)
 ├── CHARACTERS.md      # 24명 캐릭터 명단 요약
 ├── CARDS.md           # 260장 카드 풀 요약 + 샘플
-└── data/
-    ├── characters.json    # 캐릭터 원본 데이터 (진영 6 x 4명)
-    ├── generate_cards.js  # 카드 풀 생성 스크립트 (node generate_cards.js)
-    ├── cards.json          # 생성된 카드 260장 (기계 판독용)
-    └── cards.csv            # 카드 260장 (엑셀/시트 인쇄용)
+├── data/
+│   ├── characters.json           # 캐릭터 원본 데이터 (진영 6 x 4명)
+│   ├── generate_cards.js         # 카드 풀 생성 스크립트 (node generate_cards.js)
+│   ├── cards.json                  # 생성된 카드 260장 (기계 판독용)
+│   ├── cards.csv                    # 카드 260장 (엑셀/시트 인쇄용)
+│   └── generate_prototype_data.js  # 브라우저 프로토타입용 데이터 생성 스크립트
+└── prototype/         # 브라우저에서 바로 플레이할 수 있는 핫시트 프로토타입
+    ├── index.html
+    ├── style.css
+    ├── game.js         # 게임 엔진 (턴 진행/카드/특수능력/서든데스)
+    └── data.js          # 자동 생성 데이터 (직접 수정 금지)
 ```
+
+## 지금 바로 플레이하기
+
+`game/prototype/index.html`은 서버 없이도 그냥 더블클릭해서 브라우저로 열면 됩니다 (외부 라이브러리 없음, 순수 HTML/CSS/JS).
+
+1. `game/prototype/index.html`을 브라우저로 연다.
+2. "진영 무작위 배정"을 눌러 4명의 진영/캐릭터를 정한다 (필요하면 드롭다운으로 직접 바꿀 수 있음).
+3. "게임 시작" → 한 기기를 돌려가며(핫시트) 턴마다 카드/특수능력을 사용해 마지막까지 생존하면 승리.
+4. 공격을 받으면 상대 차례에 방어 카드를 낼지 물어보고, 15라운드를 넘기면 서든데스가 자동 발동합니다.
+
+캐릭터 특수능력 24종은 모두 실제로 동작하도록 단순화해 구현했습니다(세부 매핑은 `data/generate_prototype_data.js`의 `SKILLS` 참고). 밸런스나 카드 텍스트를 바꾸려면 `data/generate_cards.js` → `node generate_cards.js` → `node generate_prototype_data.js` 순서로 재생성하세요.
 
 ## 한눈에 보기
 

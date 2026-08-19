@@ -1,0 +1,194 @@
+:root {
+  --bg: #14161c;
+  --panel: #1e212b;
+  --panel2: #262a37;
+  --text: #eef0f5;
+  --muted: #9aa0b0;
+  --accent: #6f8cff;
+  --danger: #e2555a;
+  --ok: #4fbf7a;
+  --warn: #e2a13a;
+  --border: #33384a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.4;
+}
+
+header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+header h1 { font-size: 18px; margin: 0; }
+header .sub { color: var(--muted); font-size: 13px; }
+
+#round-badge {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+}
+#round-badge.sudden { background: #4a1f22; border-color: var(--danger); color: #ffb3b6; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+
+.hidden { display: none !important; }
+
+/* setup screen */
+.setup-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.setup-card h2 { margin-top: 0; font-size: 16px; }
+.player-setup-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.player-setup-row:last-child { border-bottom: none; }
+select, button {
+  font-family: inherit;
+  font-size: 14px;
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+button { cursor: pointer; transition: filter .1s; }
+button:hover:not(:disabled) { filter: brightness(1.15); }
+button:disabled { opacity: .4; cursor: not-allowed; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #0c0f16; font-weight: 600; }
+button.danger { background: var(--danger); border-color: var(--danger); color: #1a0505; font-weight: 600; }
+
+/* players board */
+#players-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.player-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  position: relative;
+}
+.player-card.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.player-card.dead { opacity: .35; }
+.player-card.dead::after { content: "탈락"; position: absolute; top: 8px; right: 10px; color: var(--danger); font-weight: 700; font-size: 12px; }
+.player-card .faction-tag { font-size: 11px; color: var(--muted); }
+.player-card h3 { margin: 2px 0 6px; font-size: 15px; }
+.bar-row { display: flex; align-items: center; gap: 6px; font-size: 12px; margin: 4px 0; }
+.bar-row .label { width: 26px; color: var(--muted); }
+.bar-track { flex: 1; height: 8px; background: var(--panel2); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; }
+.bar-fill.hp { background: linear-gradient(90deg, var(--danger), #ff9aa0); }
+.bar-fill.mp { background: linear-gradient(90deg, #3f6fd9, var(--accent)); }
+.bar-num { width: 44px; text-align: right; color: var(--muted); }
+.status-line { font-size: 11px; color: var(--warn); min-height: 14px; }
+.target-btn { margin-top: 6px; width: 100%; }
+
+/* action panel */
+#action-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+}
+#action-panel h2 { margin: 0 0 4px; font-size: 15px; }
+#turn-info { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.game-card {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 110px;
+}
+.game-card:hover:not(:disabled) { border-color: var(--accent); }
+.game-card:disabled { opacity: .35; cursor: not-allowed; }
+.game-card .card-top { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+.game-card .card-name { font-size: 14px; font-weight: 600; }
+.game-card .card-effect { font-size: 12px; color: var(--muted); }
+.game-card .card-flavor { font-size: 11px; color: #7d8296; font-style: italic; margin-top: auto; }
+.rarity-일반 { color: #9aa0b0; }
+.rarity-희귀 { color: #6fb3ff; }
+.rarity-전설 { color: #e2c23a; }
+
+.skill-box {
+  margin-top: 10px;
+  padding: 10px;
+  background: #232838;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.skill-box .info { font-size: 12px; color: var(--muted); }
+
+#log {
+  margin-top: 16px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  max-height: 220px;
+  overflow-y: auto;
+  font-size: 13px;
+}
+#log .entry { padding: 3px 0; border-bottom: 1px solid #24283350; }
+#log .entry:last-child { border-bottom: none; }
+
+#pass-device {
+  text-align: center;
+  padding: 60px 20px;
+}
+#pass-device h2 { font-size: 22px; }
+#pass-device p { color: var(--muted); }
+
+#winner-screen { text-align: center; padding: 60px 20px; }
+#winner-screen h2 { font-size: 26px; }
+
+.subject-수학 { border-left: 3px solid #2E5AAC; }
+.subject-영어 { border-left: 3px solid #C23B3B; }
+.subject-국어 { border-left: 3px solid #B0863A; }
+.subject-통합사회 { border-left: 3px solid #3A8F5B; }
+.subject-통합과학 { border-left: 3px solid #4A6FA5; }
+.subject-한국사 { border-left: 3px solid #8B3A3A; }
+.subject-공용 { border-left: 3px solid #5A5A5A; }

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>지식전쟁 (가제) — 플레이 프로토타입</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <div>
+    <h1>지식전쟁 (가제)</h1>
+    <div class="sub">핫시트 로컬 프로토타입 · 한 화면에서 4명이 돌려가며 플레이</div>
+  </div>
+  <div id="round-badge" class="hidden">라운드 0</div>
+</header>
+
+<main>
+
+  <!-- 1. 셋업 화면 -->
+  <section id="setup-screen">
+    <div class="setup-card">
+      <h2>1. 플레이어 준비 (4인)</h2>
+      <p class="sub" style="margin-top:-4px">진영은 무작위 배정 버튼으로 정하고, 배정된 진영 안에서 캐릭터를 자유롭게 고르세요.</p>
+      <button id="assign-btn" class="primary">진영 무작위 배정</button>
+      <div id="setup-rows"></div>
+    </div>
+    <button id="start-btn" class="primary" disabled>게임 시작</button>
+  </section>
+
+  <!-- 2. 디바이스 넘기기 화면 (핫시트용, 선택적으로 건너뛸 수 있음) -->
+  <section id="pass-device" class="hidden">
+    <h2 id="pass-title"></h2>
+    <p>다른 사람에게 손패가 보이지 않도록, 확인했으면 아래 버튼을 눌러 진행하세요.</p>
+    <button id="pass-continue-btn" class="primary">확인했습니다 · 계속하기</button>
+  </section>
+
+  <!-- 3. 게임 보드 -->
+  <section id="game-screen" class="hidden">
+    <div id="players-board"></div>
+
+    <div id="action-panel">
+      <h2 id="action-title"></h2>
+      <div id="turn-info"></div>
+      <div id="skill-area"></div>
+      <div id="card-area" class="card-grid"></div>
+      <div style="margin-top:10px; display:flex; gap:8px;">
+        <button id="pass-turn-btn">패스</button>
+      </div>
+    </div>
+
+    <div id="log"></div>
+  </section>
+
+  <!-- 4. 승자 화면 -->
+  <section id="winner-screen" class="hidden">
+    <h2 id="winner-title"></h2>
+    <button id="restart-btn" class="primary">다시 하기</button>
+  </section>
+
+</main>
+
+<script src="data.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
